@@ -34,4 +34,6 @@ docker run -d -e tenantId=XXXXX -e subscriptionId=XXXXX -e rgName=XXXXX -e zoneN
 
 ## Installation (remote image)
 
-*coming soon...*
+```
+docker run -d -e tenantId=XXXXX -e subscriptionId=XXXXX -e rgName=XXXXX -e zoneName=XXXXX -e recordsetName=XXXXX -e clientId=XXXXX -e clientSecret=XXXXX -e intervalInMinutes=5 ghcr.io/nikosdelis/azure-dns-updater:latest
+```
