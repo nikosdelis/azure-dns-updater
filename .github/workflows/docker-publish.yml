@@ -5,12 +5,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build_and_publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Build and push the image
       - uses: actions/checkout@v3
-        run: |
+      - run: |
           docker login --username nikosdelis --password ${{ secrets.PAT }} ghcr.io
           docker build . --tag ghcr.io/nikosdelis/azure-dns-updater:latest
           docker push ghcr.io/nikosdelis/azure-dns-updater:latest
