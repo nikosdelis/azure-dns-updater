@@ -19,5 +19,5 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           docker login --username nikosdelis --password ${{ secrets.PAT }} ghcr.io
-          docker build .  --platform linux/arm4/v8 --tag ghcr.io/nikosdelis/azure-dns-updater:latest
+          docker buildx build . --platform linux/arm4/v8 --tag ghcr.io/nikosdelis/azure-dns-updater-raspberrypi:latest
           docker push ghcr.io/nikosdelis/azure-dns-updater-raspberrypi:latest
