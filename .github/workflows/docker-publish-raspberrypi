@@ -1,0 +1,14 @@
+name: Build and push the image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          docker login --username nikosdelis --password ${{ secrets.PAT }} ghcr.io
+          docker build .  --platform linux/arm4/v8 --tag ghcr.io/nikosdelis/azure-dns-updater:latest
+          docker push ghcr.io/nikosdelis/azure-dns-updater-raspberrypi:latest
