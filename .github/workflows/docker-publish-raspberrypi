@@ -1,4 +1,4 @@
-name: Build and push the image
+name: Build and push the image for RaspberryPi
 
 on:
   push:
