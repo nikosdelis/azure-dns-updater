@@ -45,7 +45,7 @@ public class Program
                 string? currentIpInAzure = record.ARecords[0]?.Ipv4Address;
                 if (currentIpInAzure == publicIp)
                 {
-                    Console.WriteLine($"{DateTime.UtcNow.ToString()} UTC - IP address has not changed. Checking again in 5 minutes");
+                    Console.WriteLine($"{DateTime.UtcNow.ToString()} UTC - IP address has not changed. Checking again in {IntervalInMinuntes} minutes");
                 }
                 else
                 {
