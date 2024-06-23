@@ -13,11 +13,3 @@ jobs:
           docker login --username nikosdelis --password ${{ secrets.PAT }} ghcr.io
           docker build . --tag ghcr.io/nikosdelis/azure-dns-updater:latest
           docker push ghcr.io/nikosdelis/azure-dns-updater:latest
-  build_and_publish_for_raspberrypi:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: |
-          docker login --username nikosdelis --password ${{ secrets.PAT }} ghcr.io
-          docker buildx build . --platform linux/arm4/v8 --tag ghcr.io/nikosdelis/azure-dns-updater-raspberrypi:latest
-          docker push ghcr.io/nikosdelis/azure-dns-updater-raspberrypi:latest
