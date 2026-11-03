@@ -22,7 +22,9 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          # The ghcr.io package was originally created with a PAT, so GITHUB_TOKEN
+          # cannot push to it unless the package grants this repo write access.
+          password: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
 
       - uses: docker/build-push-action@v6
         with:
