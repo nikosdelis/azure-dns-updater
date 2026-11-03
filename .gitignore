@@ -353,3 +353,7 @@ App/.DS_Store
 .idea/
 .DS_Store
 .vscode/launch.json
+# Local configuration with secrets (see README)
+src/appsettings.Production.json
+src/appsettings.Development.json
+publish/

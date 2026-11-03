@@ -1,20 +1,16 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# Copy everything
-COPY src/ ./
-
-# Restore as distinct layers
+# Restore first so the package layer is cached between source changes
+COPY src/azure-dns-updater.csproj ./
 RUN dotnet restore azure-dns-updater.csproj
 
-# Build and publish a release
-RUN dotnet publish -c Release -o out
+COPY src/ ./
+RUN dotnet publish azure-dns-updater.csproj -c Release -o /app --no-restore
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
-
-WORKDIR /src
-COPY --from=build-env /src/out .
+# Runtime image: plain .NET runtime, no ASP.NET needed
+FROM mcr.microsoft.com/dotnet/runtime:10.0
+WORKDIR /app
+COPY --from=build /app .
+USER app
 ENTRYPOINT ["dotnet", "azure-dns-updater.dll"]
-
-ENV Logging__Console__FormatterName=Simple
